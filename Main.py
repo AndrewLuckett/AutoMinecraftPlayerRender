@@ -8,6 +8,7 @@ Config = {}
 def log(*lines):
     print(*lines)
 
+
 def loadConfig(path):
     import csv
     badcommands = []
@@ -46,11 +47,12 @@ def main():
     for name in names:
         loadAndSanitize(name)
 
-        args = f"{Config['blenderpath']} -b {Config['blendfilepath']}"
-        args += f" -o {os.path.abspath(Config['outputpath'] + name + '-##' )}"
-        args += " -a" if Config["allframes"] else f" -f {int(Config['frame'])}"
+        args = f"{Config['blenderpath']} -b {Config['blendfilepath']} "
+        args += f"-o {os.path.abspath(Config['outputpath'] + name)}-## "
+        args += "-a" if Config["allframes"] else f"-f {int(Config['frame'])}"
         print(args)
         proc = subprocess.run(args)
+
 
 if __name__ == "__main__":
     t = main()
